@@ -8,66 +8,106 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 </head>
 <body class="bg-gray-100 font-sans">
     <!-- Header -->
     <header class="bg-green-700 text-white shadow-md sticky top-0 z-50">
-
-        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
-            <div class="flex items-center mb-4 md:mb-0">
-                <!-- Logo Space -->
-                <div class="mr-3">
-                    <img src="logo.jpeg" alt="BRSU Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/48x48?text=BRSU'; this.onerror=null;">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo and Title -->
+                <div class="flex items-center">
+                    <div class="mr-3">
+                        <img src="logo.jpeg" alt="BRSU Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/48x48?text=BRSU'; this.onerror=null;">
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">BRSU</h1>
+                        <p class="text-sm hidden md:block">Bangladesh Rohingya Student Union</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="text-2xl font-bold">BRSU</h1>
-                    <p class="text-sm hidden md:block">Bangladesh Rohingya Student Union</p>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:block bg-blue-600 px-6 py-2 rounded-full">
+                    <div class="flex items-center space-x-6">
+                        <a href="index.html" class="text-white font-bold">Home</a>
+                        <a href="about.html" class="text-white font-bold">About</a>
+
+                        <!-- Our Work with Dropdown -->
+                        <div class="relative inline-block text-left">
+                            <!-- Button to toggle dropdown -->
+                            <button onclick="toggleDropdown()" class="inline-flex items-center gap-1 px-4 py-1.5 text-white font-bold hover:text-gray-200">
+                                Our Work
+                                <svg class="w-4 h-4 transform transition-transform duration-200" id="arrowIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            <!-- Arrow (small triangle below button) -->
+                            <div id="dropdownArrow" class="absolute left-6 top-full w-3 h-3 bg-white rotate-45 transform translate-y-0 z-40 shadow-md opacity-0 invisible transition duration-200"></div>
+
+                            <!-- Dropdown Menu -->
+                            <div id="dropdownMenu" class="absolute left-0 mt-2 w-56 z-50 bg-white text-green-800 shadow-lg rounded-md opacity-0 invisible transition duration-300 ease-in-out pointer-events-none">
+                                <ul class="py-2 px-4 space-y-2">
+                                    <li><a href="education.html" class="block hover:text-green-500">Education</a></li>
+                                    <li><a href="advocacy.html" class="block hover:text-green-500">Advocacy</a></li>
+                                    <li><a href="social.html" class="block hover:text-green-500">Social-Services</a></li>
+                                    <li><a href="sports.html" class="block hover:text-green-500">Sports</a></li>
+                                    <li><a href="blood.html" class="block hover:text-green-500">Free Blood donation</a></li>
+                                    <li><a href="livelihood.html" class="block hover:text-green-500">Livelihood Activities</a></li>
+                                    <li><a href="youth.html" class="block hover:text-green-500">Youth Empowerment Program ETC</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Additional Navbar Links -->
+                        <a href="contact.html" class="hover:text-green-200 font-bold">Contact</a>
+                        <a href="donate.html" class="hover:text-green-200 font-bold">Donate Us</a>
+                    </div>
+                </nav>
+                
+                <!-- Mobile Menu Button (3-dot menu) -->
+                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu (Hidden by default) -->
+            <div id="mobile-menu" class="mobile-menu lg:hidden mt-4 bg-blue-600 rounded-lg overflow-hidden">
+                <div class="flex flex-col p-4 space-y-3">
+                    <a href="index.html" class="text-white font-bold py-2">Home</a>
+                    <a href="about.html" class="text-white font-bold py-2">About</a>
+                    
+                    <!-- Mobile Dropdown -->
+                    <div class="relative">
+                        <button onclick="toggleMobileDropdown()" class="flex justify-between items-center w-full text-white font-bold py-2">
+                            Our Work
+                            <svg class="w-4 h-4" id="mobileDDArrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="mobile-dropdown" class="hidden bg-blue-700 mt-1 rounded p-2">
+                            <ul class="space-y-2">
+                                <li><a href="education.html" class="block text-white hover:text-green-200 py-1">Education</a></li>
+                                <li><a href="advocacy.html" class="block text-white hover:text-green-200 py-1">Advocacy</a></li>
+                                <li><a href="social.html" class="block text-white hover:text-green-200 py-1">Social-Services</a></li>
+                                <li><a href="sports.html" class="block text-white hover:text-green-200 py-1">Sports</a></li>
+                                <li><a href="blood.html" class="block text-white hover:text-green-200 py-1">Free Blood donation</a></li>
+                                <li><a href="livelihood.html" class="block text-white hover:text-green-200 py-1">Livelihood Activities</a></li>
+                                <li><a href="youth.html" class="block text-white hover:text-green-200 py-1">Youth Empowerment Program ETC</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <a href="contact.html" class="text-white font-bold py-2">Contact</a>
+                    <a href="donate.html" class="text-white font-bold py-2">Donate Us</a>
                 </div>
             </div>
-<nav class="bg-blue-600  px-6 py-3 rounded-full">
-  <div class="flex items-center justify-between">
-    <!-- Left Side Links -->
-    <div class="flex items-center space-x-6">
-      <a href="index.html" class="text-white font-bold">Home</a>
-      <a href="about.html" class="text-white font-bold">About</a>
-
-      <!-- Our Work with Dropdown -->
-    <div class="relative inline-block text-left">
-        <!-- Button to toggle dropdown -->
-        <button onclick="toggleDropdown()" class="inline-flex items-center gap-1 px-4 py-1.5 text-white font-bold hover:text-gray-200">
-          Our Work
-          <svg class="w-4 h-4 transform transition-transform duration-200" id="arrowIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        <!-- Arrow (small triangle below button) -->
-        <div id="dropdownArrow" class="absolute left-6 top-full w-3 h-3 bg-white rotate-45 transform translate-y-0 z-40 shadow-md opacity-0 invisible transition duration-200"></div>
-
-        <!-- Dropdown Menu -->
-        <div id="dropdownMenu" class="absolute left-0 mt-2 w-56 z-50 bg-white text-green-800 shadow-lg rounded-md opacity-0 invisible transition duration-300 ease-in-out pointer-events-none">
-          <ul class="py-2 px-4 space-y-2">
-             <li><a href="education.html" class="block hover:text-green-500">Education</a></li>
-            <li><a href="advocacy.html" class="block hover:text-green-500">Advocacy</a></li>
-            <li><a href="social.html" class="block hover:text-green-500">Social-Services</a></li>
-            <li><a href="sports.html" class="block hover:text-green-500">Sports</a></li>
-            <li><a href="blood.html" class="block hover:text-green-500">Free Blood donation</a></li>
-            <li><a href="livelihood.html" class="block hover:text-green-500">Livelihood Activities</a></li>
-            <li><a href="youth.html" class="block hover:text-green-500">Youth Empowerment Program ETC</a></li>
-          </ul>
         </div>
-      </div>
+    </header>
 
-      <!-- Additional Navbar Links -->
-      <a href="contact.html" class="hover:text-green-200 font-bold">Contact</a>
-      <a href="donate.html" class="hover:text-green-200 font-bold">Donate Us</a>
-    </div>
-
-
-  </div>
-</nav>
-</nav></header>
-
+    <!-- Rest of your content remains the same -->
     <!-- Hero Section with Slider -->
      <!-- slide1 -->
     <section class="relative overflow-hidden">
@@ -155,6 +195,7 @@
     </section>
 
     <!-- Main Content -->
+     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
         <!-- Mission Statement -->
         <section class="mb-12">
